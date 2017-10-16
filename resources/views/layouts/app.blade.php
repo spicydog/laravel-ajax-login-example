@@ -76,5 +76,38 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script type="text/javascript">
+
+        // Set default CSRF header
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Intercept login form
+        $('#login-form').submit(function(e){
+            
+            // Prevent normal form submission, we well do in JS instead
+            e.preventDefault();
+
+            // Get form data
+            var data = {
+                    email: $('[name=email]').val(),
+                    password: $('[name=password]').val(),
+                    remember: $('[name=remember]').val(),
+                };
+
+            // Send the request
+            $.post($('this').attr('action'), data, function(response) {
+                if (response.success) {
+                    // If login success, go to home
+                    window.location.replace("{{ route('home') }}");
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
