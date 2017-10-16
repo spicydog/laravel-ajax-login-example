@@ -108,6 +108,29 @@
             });
         });
 
+        // Intercept register form
+        $('#register-form').submit(function(e){
+            
+            // Prevent normal form submission, we well do in JS instead
+            e.preventDefault();
+
+            // Get form data
+            var data = {
+                    name: $('[name=name]').val(),
+                    email: $('[name=email]').val(),
+                    password: $('[name=password]').val(),
+                    password_confirmation: $('[name=password_confirmation]').val(),
+            };
+
+            // Send the request
+            $.post($('this').attr('action'), data, function(response) {
+                if (response.success) {
+                    // If register success, go to home
+                    window.location.replace("{{ route('home') }}");
+                }
+            });
+        });
+
     </script>
 </body>
 </html>
