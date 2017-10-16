@@ -52,7 +52,10 @@ class LoginController extends Controller
 
         if($request->ajax()){
             // If request from AJAX
-            return ['success' => true];
+            return [
+                'success' => true,
+                'redirect' => $this->redirectPath() ?: route('home'),
+            ];
         } else {
             // Normal POST do redirect
             return $this->authenticated($request, $this->guard()->user())

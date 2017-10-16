@@ -102,8 +102,8 @@
             // Send the request
             $.post($('this').attr('action'), data, function(response) {
                 if (response.success) {
-                    // If login success, go to home
-                    window.location.replace("{{ route('home') }}");
+                    // If login success, redirect
+                    window.location.replace(response.redirect);
                 }
             });
         });
@@ -125,8 +125,8 @@
             // Send the request
             $.post($('this').attr('action'), data, function(response) {
                 if (response.success) {
-                    // If register success, go to home
-                    window.location.replace("{{ route('home') }}");
+                    // If register success, redirect
+                    window.location.replace(response.redirect);
                 }
             });
         });
